@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Для тебя</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Nunito:wght@400;600&family=IBM+Plex+Mono&display=swap">
+<style>
+:root{--bg:#fff1ee;--bg2:#ffd9dc;--ink:#7d1f42;--soft:#b05a74;--heart:#e8506f;--heart2:#ff8aa0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1020;--bg2:#4a1a33;--ink:#ffd6df;--soft:#e8a3b6;--heart:#ff6b8b;--heart2:#ff9bb0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#2a1020;--bg2:#4a1a33;--ink:#ffd6df;--soft:#e8a3b6;--heart:#ff6b8b;--heart2:#ff9bb0;color-scheme:dark}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;overflow:hidden;position:relative}
+body::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,var(--bg2),transparent 65%)}
+main{position:relative;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;justify-content:safe center;gap:1.2rem;padding:1.5rem;text-align:center}
+main>*{flex-shrink:0}
+button.heart{background:none;border:0;padding:0;cursor:pointer;width:min(44vw,200px);-webkit-tap-highlight-color:transparent;border-radius:50%}
+button.heart:focus-visible{outline:3px solid var(--ink);outline-offset:8px}
+button.heart svg{width:100%;height:auto;display:block;animation:beat 1.6s ease-in-out infinite;transform-origin:center}
+button.heart:active svg{transform:scale(.92)}
+@keyframes beat{0%,100%{transform:scale(1)}14%{transform:scale(1.09)}28%{transform:scale(1)}42%{transform:scale(1.06)}70%{transform:scale(1)}}
+h1{cursor:pointer;transition:opacity .45s;max-width:92vw;overflow-wrap:anywhere;text-wrap:balance;font-family:"Marck Script",system-ui,sans-serif;font-weight:400;font-size:clamp(2.8rem,13vw,5.6rem);line-height:1.3;margin:0;letter-spacing:normal;padding:.05em 0}
+.msg{min-height:3.2em;max-width:22em;font-size:1.1rem;line-height:1.6;color:var(--soft);margin:0}
+.hint{font-size:.9rem;color:var(--soft);margin:0}
+.fl{position:absolute;pointer-events:none;color:var(--heart);font-size:1.6rem;will-change:transform,opacity;z-index:2}
+main{z-index:1}
+#pt{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.pt{position:absolute;top:0;width:12px;height:16px;background:var(--heart2);opacity:.45;border-radius:100% 0 100% 0}
+.days{font-size:1rem;color:var(--ink);margin:0;padding:.45rem 1rem;border:1px solid var(--heart2);border-radius:999px}
+.days[hidden]{display:none}
+button.play{font:inherit;font-weight:600;font-size:.95rem;color:var(--ink);background:transparent;border:1px solid var(--heart);border-radius:999px;padding:.6rem 1.2rem;cursor:pointer}
+button.play:hover{background:var(--bg2)}
+button.play:focus-visible,button.gh:focus-visible,button.cl:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center}
+.mw.sc{justify-content:flex-start;padding-top:4.2rem}
+#lp{font-family:"Marck Script",system-ui,sans-serif;font-size:clamp(2rem,9vw,3.4rem);line-height:1.25;margin:0;min-height:1.3em;max-width:14em;word-break:break-word}
+#lc{max-width:34rem}
+.mw{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;padding:4rem 1.5rem 2rem;text-align:center;overflow:auto}
+.mw h2{font-family:"Marck Script",cursive;font-weight:400;font-size:clamp(2rem,9vw,3rem);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;max-width:26rem}
+.chips button{font:inherit;font-size:.95rem;color:var(--ink);background:transparent;border:1px solid var(--heart2);border-radius:999px;padding:.5rem 1rem;cursor:pointer}
+.chips button.on{background:var(--bg2);border-color:var(--heart);font-weight:600}
+.chips button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+#mt{min-height:7em;max-width:22em;font-size:1.1rem;line-height:1.65;margin:0}
+.ov{position:absolute;inset:0;z-index:10;background:var(--bg);overflow:hidden}
+.ov[hidden]{display:none}
+.ov .top{position:absolute;top:1rem;left:1rem;right:1rem;display:flex;justify-content:space-between;align-items:center;z-index:6}
+button.cl{font:inherit;color:var(--soft);background:none;border:1px solid var(--border,var(--soft));border-radius:999px;padding:.35rem .9rem;cursor:pointer}
+button.gh{position:absolute;top:0;background:none;border:0;padding:8px;color:var(--heart);font-size:2.6rem;line-height:1;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem;text-align:center;z-index:7;background:var(--bg)}
+#end[hidden]{display:none}
+#end p{font-family:"Marck Script",cursive;font-size:clamp(1.8rem,8vw,2.8rem);line-height:1.25;margin:0;max-width:14em}
+.fl{z-index:20}
+@media (prefers-reduced-motion:reduce){button.heart svg{animation:none}}
+h1.long{font-size:clamp(1.7rem,7.5vw,3.2rem)}
+h1:lang(ar),h1:lang(fa),h1:lang(ur),h1:lang(hi),h1:lang(bn),h1:lang(ta),h1:lang(ne),h1:lang(ka),h1:lang(hy),h1:lang(zh),h1:lang(ja),h1:lang(ko),h1:lang(mn){font-family:system-ui,sans-serif;line-height:1.6;font-weight:600}
+h1:focus-visible{outline:3px solid var(--ink);outline-offset:6px;border-radius:8px}
+.lnm{font-size:.9rem;color:var(--soft);margin:-.3rem 0 0;min-height:1.3em;transition:opacity .45s}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;width:100%;max-width:26rem}
+.stats div{background:var(--bg2);border-radius:14px;padding:.8rem .6rem}
+.stats div:last-child{grid-column:1/-1}
+.stats b{display:block;font-family:"Marck Script",system-ui,sans-serif;font-size:2.3rem;font-weight:400;color:var(--ink);line-height:1.2}
+.stats span{font-size:.88rem;color:var(--soft);line-height:1.3}
+.h2b{margin-top:1rem!important}
+.gl{max-width:26rem;width:100%;text-align:left;display:grid;gap:.7rem}
+.gl p{margin:0;line-height:1.5}
+.gl b{color:var(--heart);font-weight:600}
+.fin{font-family:"Marck Script",system-ui,sans-serif;font-size:1.7rem;margin:.5rem 0 1rem}
+#wsh{background:linear-gradient(180deg,#1d1440 0%,#3b2262 38%,#8a3d7a 78%,#d6708a 100%);color:#fff}
+#ws{position:absolute;inset:0;overflow:hidden}
+.sk{position:absolute;border-radius:50%;background:#ffe9a8;animation:tw 3s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:1}}
+.wl{font-family:"Marck Script",system-ui,sans-serif;font-size:1.6rem;color:#ffe9a8}
+.wcl{color:#fff!important;border-color:rgba(255,255,255,.5)!important}
+.wc{position:absolute;left:0;right:0;bottom:0;padding:1rem 1.5rem calc(1.2rem + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;align-items:center;gap:.8rem;text-align:center;z-index:3}
+.wh{margin:0;font-size:1rem;color:#ffe9d8}
+.wmsg{margin:0;min-height:2.6em;max-width:24em;font-size:1rem;line-height:1.5;color:#fff}
+.wr{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center}
+#wsh .wp,#ltr .wp{color:#fff;border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.12)}
+#wsh .wp:hover,#ltr .wp:hover{background:rgba(255,255,255,.25)}
+#wf{width:100%;max-width:24rem;display:flex;flex-direction:column;gap:.6rem}
+#wf[hidden]{display:none}
+#wt{font:inherit;font-size:1rem;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.5);border-radius:12px;padding:.7rem .9rem;resize:none;width:100%;box-sizing:border-box}
+#wt::placeholder{color:rgba(255,255,255,.7)}
+#wt:focus-visible{outline:3px solid #ffe9a8}
+.shoot{position:absolute;width:90px;height:3px;border:0;padding:0;border-radius:3px;background:linear-gradient(90deg,transparent,#fff2c4,#ffd36b);cursor:pointer;z-index:2;box-shadow:0 0 12px 2px rgba(255,220,130,.8)}
+.shoot::before{content:"";position:absolute;inset:-20px -8px}
+.wst{position:absolute;border:0;background:none;padding:6px;font-size:1.5rem;line-height:1;color:#ffd36b;cursor:pointer;text-shadow:0 0 10px #ffd36b;z-index:2}
+#ltr{background:radial-gradient(ellipse at 50% 40%,rgba(255,200,120,.25),transparent 65%),repeating-linear-gradient(90deg,#5a3a22 0 38px,#4f321d 38px 40px,#5e3d25 40px 94px,#4a2f1b 94px 96px);overflow:auto}
+.lw{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:4rem 1.2rem 2rem;box-sizing:border-box}
+.paper{box-sizing:border-box;width:100%;max-width:31rem;background:#fbf3e1;background-image:repeating-linear-gradient(180deg,transparent 0 31px,rgba(150,110,70,.09) 31px 32px);color:#3a2a1c;border-radius:4px;padding:1.8rem 1.6rem;box-shadow:0 12px 30px rgba(0,0,0,.5),inset 0 0 40px rgba(180,140,90,.25);transform:rotate(-.5deg)}
+.tw{font-family:"IBM Plex Mono","Courier New",monospace;font-size:.98rem;line-height:2;white-space:pre-wrap;text-align:left;min-height:12em}
+.tw.go::after{content:"";display:inline-block;width:.55em;height:1.1em;background:#3a2a1c;vertical-align:text-bottom;margin-left:2px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.lbt{display:flex;gap:.6rem}
+.btns{display:none}
+main[hidden]{display:none}
+main{padding-bottom:5.5rem}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:8;display:flex;justify-content:space-around;padding:.35rem .3rem calc(.35rem + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--bg2)}
+.tab{flex:1;background:none;border:0;font:inherit;font-size:.72rem;color:var(--soft);display:flex;flex-direction:column;align-items:center;gap:.1rem;padding:.35rem 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tab span{font-size:1.25rem;line-height:1}
+.tab[aria-current="page"]{color:var(--ink);font-weight:600}
+.tab[aria-current="page"] span{color:var(--heart)}
+.tab:focus-visible{outline:3px solid var(--ink);outline-offset:-3px;border-radius:10px}
+.pg{position:absolute;inset:0;z-index:3;overflow-y:auto;padding:2rem 1.2rem 6.5rem;box-sizing:border-box;animation:fi .35s ease}
+.pg[hidden]{display:none}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pg h2{font-family:"Marck Script",system-ui,sans-serif;font-size:2.5rem;font-weight:400;margin:.4rem 0 0;text-align:center}
+.pg .sub{text-align:center;color:var(--soft);margin:.2rem 0 1.3rem}
+.cards{display:grid;gap:.8rem;max-width:36rem;margin:0 auto;grid-template-columns:1fr}
+@media (min-width:600px){.cards{grid-template-columns:1fr 1fr}}
+.card{font:inherit;text-align:left;background:var(--bg2);color:var(--ink);border:1px solid transparent;border-radius:16px;padding:1rem 1.1rem;cursor:pointer;display:flex;flex-direction:column;gap:.25rem;position:relative}
+.card b{font-weight:600;font-size:1.05rem;padding-right:3.5rem}
+.card span{font-size:.9rem;color:var(--soft)}
+.card:hover{border-color:var(--heart2)}
+.card:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.card.soon{opacity:.6;cursor:default}
+.card i{position:absolute;top:.8rem;right:.9rem;font-size:.7rem;font-style:normal;color:var(--heart);border:1px solid var(--heart2);border-radius:999px;padding:.1rem .5rem}
+.daily{max-width:36rem;margin:0 auto 1rem;background:linear-gradient(135deg,#ff8aa0,#e8506f);color:#fff;border-radius:18px;padding:1.1rem 1.2rem}
+.daily small{opacity:.92;font-size:.8rem;letter-spacing:.04em}
+.daily p{margin:.35rem 0 0;font-family:"Marck Script",system-ui,sans-serif;font-size:1.6rem;line-height:1.3}
+.skcv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.pg.night{background:linear-gradient(180deg,#1d1440 0%,#3b2262 38%,#8a3d7a 78%,#d6708a 100%);overflow:hidden;padding:0}
+.nin{position:relative;z-index:1;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;padding:2rem 1.2rem 6.5rem;overflow-y:auto}
+.night h2{color:#ffe9a8}.night .sub{color:#ffe9d8}
+.night .card{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.night .card span{color:#ffe9d8}.night .card i{color:#ffe9a8;border-color:rgba(255,233,168,.6)}
+#dzs{width:min(80vw,320px);height:auto;overflow:visible}
+#dzs ellipse{cursor:pointer}
+#dzs ellipse:focus-visible{outline:none;stroke:var(--ink);stroke-width:3}
+#dzt{margin:0;font-family:"Marck Script",system-ui,sans-serif;font-size:1.9rem;min-height:1.5em}
+</style>
+</head>
+<body>
+<main>
+<button class="heart" id="h" aria-label="Нажми на сердце">
+<svg viewBox="0 0 100 90" role="img" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--heart2)"/><stop offset="1" stop-color="var(--heart)"/></linearGradient></defs><path d="M50 84C14 58 4 38 4 25 4 12 14 4 26 4c9 0 18 5 24 14C56 9 65 4 74 4c12 0 22 8 22 21 0 13-10 33-46 59z" fill="url(#g)"/><ellipse cx="29" cy="24" rx="7" ry="4.5" fill="#fff" opacity=".45" transform="rotate(-35 29 24)"/></svg>
+</button>
+<h1 id="t" tabindex="0" role="button" aria-label="Сменить язык" lang="ru">Я тебя люблю</h1>
+<p class="lnm" id="ln">Русский</p>
+<p class="msg" id="m" aria-live="polite">Просто хотел, чтобы ты это знала.</p>
+<p class="hint">Нажми на сердце или на надпись</p>
+<p class="days" id="dy" hidden></p>
+<div class="btns"><button class="play" id="mb">Когда тебе…</button><button class="play" id="ab">Про нас</button><button class="play" id="wb">Загадай желание</button><button class="play" id="ltb">Письмо</button><button class="play" id="dzb">Любит, не любит</button><button class="play" id="pl">Поймай сердечки</button></div>
+</main>
+<div id="pgs"></div>
+<nav class="nav" id="nav" aria-label="Разделы"></nav>
+<div id="pt" aria-hidden="true"></div>
+<div id="abt" class="ov" hidden>
+<div class="top"><span></span><button class="cl" id="ca">Закрыть</button></div>
+<div class="mw sc"><h2>Мы в цифрах</h2><div class="stats" id="st"></div><h2 class="h2b">Наш словарик</h2><div class="gl">
+<p><b>Любимка</b> — самое тёплое слово в нашем чате. От тебя его можно услышать за любую мелочь.</p>
+<p><b>Умничка</b> — наш способ сказать «я тобой горжусь». Работает всегда.</p>
+<p><b>Спасибочки</b> — слово, после которого хочется сделать для тебя ещё что-нибудь.</p>
+<p><b>Доброе утро</b> — наша традиция: с него начинается каждый день, даже самый загруженный.</p></div>
+<p class="fin">Это только начало, любимка.</p></div>
+</div>
+<div id="wsh" class="ov" hidden>
+<div id="ws"><canvas id="wsc" class="skcv"></canvas></div>
+<div class="top"><span class="wl">Загадай желание</span><button class="cl wcl" id="wcl">Закрыть</button></div>
+<div class="wc"><p class="wh" id="wh">Поймай падающую звезду</p>
+<div id="wf" hidden><textarea id="wt" maxlength="160" rows="3" placeholder="Загадай желание…" aria-label="Твоё желание"></textarea><div class="wr"><button class="play wp" id="wok">Загадать</button><button class="play wp" id="wno">Отмена</button></div></div>
+<p class="wmsg" id="wm" aria-live="polite"></p>
+<div class="wr"><button class="play wp" id="wgo">Загадать желание</button><button class="play wp" id="wsn" hidden>Рассказать Алену</button></div></div>
+</div>
+<div id="ltr" class="ov" hidden>
+<div class="top"><span></span><button class="cl wcl" id="ltc">Закрыть</button></div>
+<div class="lw"><div class="paper"><div id="ltx" class="tw" aria-live="off"></div></div><div class="lbt"><button class="play wp" id="lts">Допечатать</button><button class="play wp" id="ltre">Заново</button></div></div>
+</div>
+<div id="dz" class="ov" hidden>
+<div class="top"><span></span><button class="cl" id="dzc">Закрыть</button></div>
+<div class="mw"><h2>Любит, не любит</h2><svg id="dzs" viewBox="0 0 300 300" role="group" aria-label="Ромашка"></svg><p id="dzt" aria-live="polite">Оторви лепесток</p><button class="play" id="dzr">Заново</button></div>
+</div>
+<div id="md" class="ov" hidden>
+<div class="top"><span></span><button class="cl" id="cm">Закрыть</button></div>
+<div class="mw"><h2>Когда тебе…</h2><div class="chips" id="ch"></div><p id="mt" aria-live="polite">Выбери, как ты себя чувствуешь.</p></div>
+</div>
+<div id="gm" class="ov" hidden>
+<div class="top"><span id="sc" aria-live="polite">Поймано: 0 из 10</span><button class="cl" id="cl">Закрыть</button></div>
+<div id="end" hidden><p>Ты поймала все мои сердечки, любимка. Они и так твои. Я тебя люблю.</p><button class="play" id="ag">Сыграть ещё раз</button></div>
+</div>
+<script>
+var lines=["Ты моя любимка. Всегда.", "Ты умничка, я в тебе не сомневаюсь ни на секунду.", "Я рад, что ты есть у меня.", "С тобой даже обычный вторник становится праздником.", "Люблю тебя как до луны и обратно.", "Мне очень повезло, что ты моя.", "Твоя улыбка — моё любимое начало дня.", "Я в тебя верю. Всегда и во всём.", "Ты красивая снаружи и ещё красивее внутри.", "С тобой мне спокойно и тепло.", "Спасибо, что ты рядом, даже когда мы не рядом.", "Ты делаешь мои дни лучше, просто существуя.", "Каждое твоё «доброе утро» — маленький праздник.", "Мне нравится, как ты смеёшься. Хочу слышать это чаще.", "Ты моё любимое «домой».", "Твои сообщения — лучшая часть моего дня.", "С тобой я хочу быть лучше.", "Ты справишься. Ты всегда справляешься, умничка.", "Я скучаю по тебе, даже когда ты совсем рядом.", "Обнимаю тебя крепко-крепко, любимка.", "Спасибо, что выбрала меня.", "Ты — самое тёплое место на свете.", "Горжусь тобой больше, чем умею сказать.", "Люблю в тебе всё: и умничку, и сонную любимку.", "Даже чай с клюквой и апельсином вкуснее, когда ты рядом.", "Ты красавица. Это просто факт.", "Мне с тобой хорошо. Просто хорошо, и этого хватает для счастья.", "Моё любимое занятие — думать о тебе.", "Ты лучшее, что со мной случилось.", "Когда тебе тяжело, помни: я на твоей стороне.", "Твоё «спасибочки» согревает лучше любого пледа.", "Ты мой человек.", "Я выбираю тебя каждый день.", "С тобой любое «давай» превращается в приключение.", "Ты заслуживаешь самого лучшего, и я стараюсь, чтобы ты это чувствовала.", "Каждый день рядом с тобой — подарок.", "Ты умеешь превращать обычное в особенное.", "Спасибо, что ты именно такая, любимка.", "Люблю тебя. Просто люблю, без причин.", "Ты — моё лучшее решение.", "Спокойной ночи, любимая. Пусть приснится что-нибудь хорошее.", "Любимая, ты даже не представляешь, как сильно я тебя люблю.", "Любимая, ты моя любимая причина возвращаться домой.", "Любимая, мне с тобой так тепло, что никакая зима не страшна.", "Любимая, ты самая лучшая. Не спорь.", "Любимая, спасибо, что слушаешь меня и веришь в меня.", "Любимка, ты моё солнышко в любую погоду.", "Любимка, ты сегодня уже молодец. Остальное подождёт.", "Любимка, я тобой горжусь каждый день.", "Любимка, обними себя за меня.", "Любимка, я так рад каждому твоему сообщению.", "Умничка моя, у тебя всё получится.", "Умничка, ты даже не замечаешь, как много делаешь.", "Умничка, отдохни. Ты это заслужила.", "Умничка моя, ты меня вдохновляешь.", "Моя умница и красавица.", "Красавица, ты сегодня особенно прекрасна. Как и вчера.", "Красавица моя, не забывай улыбаться, тебе очень идёт.", "Ты красавица, умничка и просто моя любимая.", "Ты не просто моя девушка, ты мой лучший друг.", "Ты моя поддержка, моё вдохновение и моя любимая.", "Я люблю тебя за то, какая ты есть.", "Люблю, как ты заботишься обо мне.", "Люблю твои голосовые: в них весь твой тёплый голос.", "Твои голосовые — моя любимая музыка.", "Люблю, когда ты говоришь «давай»: с тобой всё получается.", "Люблю, как ты говоришь «спасибочки».", "Люблю твои стикеры и твоё чувство юмора.", "Люблю твоё «доброе утро» в любом настроении.", "Люблю засыпать с мыслями о тебе.", "Люблю просыпаться с мыслью, что ты у меня есть.", "Твой смех — самый красивый звук на свете.", "Ты умеешь поддержать так, что сразу становится легче.", "Спасибо, что веришь в меня, даже когда я сам сомневаюсь.", "Твоё «ты всё можешь» делает меня сильнее.", "Рядом с тобой я становлюсь спокойнее и добрее.", "Рядом с тобой даже усталость отступает.", "Рядом с тобой всё на своих местах.", "С тобой мне ничего не страшно.", "С тобой хорошо и в радости, и в тишине.", "С тобой простой вечер лучше любого праздника.", "С тобой я чувствую себя дома, где бы мы ни были.", "Ты — мой самый дорогой человек.", "Ты — моя самая тёплая мысль.", "Ты — моя радость, моя забота и моя любовь.", "Ты лучше всего, о чём я мечтал.", "Ты — моя любимая глава в этой жизни.", "Ты — мой уют.", "Ты — моё «всё хорошо».", "Ты — моя спокойная гавань.", "Пусть у тебя сегодня всё получится легко.", "Пусть этот день будет добрым к тебе, любимая.", "Пусть сегодня тебя окружают только хорошие люди и добрые слова.", "Желаю тебе сегодня много улыбок и ни одной лишней заботы.", "Не торопись, ты всё успеешь. Я рядом.", "Не переживай, всё будет хорошо. Я с тобой.", "Дыши. Ты справишься. Я в тебя верю.", "Ты не обязана быть сильной каждую минуту. Я рядом.", "Выпей чаю и расслабься, любимая.", "Не забудь поесть и отдохнуть, моя умничка.", "Береги себя. Для меня ты — самое ценное.", "Тепло одевайся и возвращайся ко мне поскорее.", "Хочу обнять тебя прямо сейчас.", "Хочу всегда быть рядом, когда тебе нужна поддержка.", "Хочу делать тебя счастливой каждый день.", "Хочу, чтобы ты улыбалась как можно чаще.", "Хочу быть рядом и в радости, и в трудные дни.", "Хочу ещё много-много наших вечеров.", "Хочу ещё больше наших «доброе утро».", "Хочу прожить с тобой много хороших дней.", "Мне нравится, как ты думаешь и как чувствуешь.", "Мне нравится, как ты заботишься обо мне.", "Мне нравится, что ты настоящая.", "Мне нравится быть твоим.", "Мне нравится быть рядом с тобой. Всегда и везде.", "Мне нравится смотреть, как ты радуешься мелочам.", "Спасибо за каждый наш разговор.", "Спасибо за твою заботу, она мне очень важна.", "Спасибо за твою доброту. Ты удивительная.", "Спасибо за терпение и за любовь.", "Спасибо за то, что ты есть, любимка.", "Спасибо за тёплые слова. Они лучше любых подарков.", "Ты делаешь меня счастливым.", "Ты делаешь мир красивее.", "Ты делаешь мои дни яркими.", "Ты меняешь меня к лучшему.", "Каждое утро с тобой — как маленькое чудо.", "Каждая минута с тобой для меня ценна.", "Каждый твой взгляд заставляет меня улыбаться.", "Каждое твоё слово для меня важно.", "Ты у меня одна такая.", "Ты у меня самая-самая.", "Мне не нужно искать счастье: оно рядом со мной.", "Я счастлив, что именно ты рядом.", "Я благодарен судьбе за тебя.", "Я всегда на твоей стороне.", "Я всегда рядом, даже если далеко.", "Я люблю тебя сегодня, завтра и всегда.", "Я люблю тебя сильнее, чем вчера, но меньше, чем завтра.", "Люблю, ценю, обожаю. Твой навсегда."];
+var bag=[],m=document.getElementById("m"),h=document.getElementById("h");
+var still=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function pop(x,y){
+var n=still?3:9;
+for(var k=0;k<n;k++){
+var s=document.createElement("span");s.className="fl";s.textContent=k%3?"♥":"♡";
+s.style.left=(x-12)+"px";s.style.top=(y-12)+"px";document.body.appendChild(s);
+var dx=(Math.random()-.5)*160,dy=-(90+Math.random()*170),sc=.7+Math.random()*.9;
+if(still){s.style.left=(x-12+(k-1)*30)+"px";setTimeout(function(e){e.remove()}.bind(null,s),900);continue}
+var a=s.animate([{transform:"translate(0,0) scale(.4)",opacity:1},{transform:"translate("+dx+"px,"+dy+"px) scale("+sc+")",opacity:0}],{duration:1100+Math.random()*700,easing:"cubic-bezier(.2,.7,.3,1)"});
+a.onfinish=function(e){e.remove()}.bind(null,s);
+}}
+h.addEventListener("click",function(e){
+var r=h.getBoundingClientRect(),x=e.clientX||r.left+r.width/2,y=e.clientY||r.top+r.height/2;
+pop(x,y);m.textContent=nextLine();
+});
+var START="";
+var dy=document.getElementById("dy");
+if(START){var n=Math.max(0,Math.floor((Date.now()-new Date(START+"T00:00:00").getTime())/864e5));var q=n%100,w=q>10&&q<15?"дней":(n%10==1?"день":(n%10>1&&n%10<5?"дня":"дней"));dy.textContent="Мы вместе уже "+n+" "+w;dy.hidden=false}
+if(!still){var pt=document.getElementById("pt");for(var j=0;j<16;j++){var p=document.createElement("span");p.className="pt";var x0=Math.random()*100,sw=(Math.random()-.5)*120,sz=.7+Math.random()*.8;p.style.left=x0+"%";p.style.width=(12*sz)+"px";p.style.height=(16*sz)+"px";pt.appendChild(p);p.animate([{transform:"translate(0,-5vh) rotate(0deg)"},{transform:"translate("+sw+"px,105vh) rotate("+(360+Math.random()*360)+"deg)"}],{duration:9000+Math.random()*8000,delay:-Math.random()*12000,iterations:Infinity,easing:"linear"})}}
+var g=document.getElementById("gm"),sc=document.getElementById("sc"),en=document.getElementById("end"),caught=0,tm=null;
+function drop(){if(caught>=10)return;var b=document.createElement("button");b.className="gh";b.textContent="♥";b.setAttribute("aria-label","Сердечко");b.style.left=(6+Math.random()*80)+"%";g.appendChild(b);
+var a=b.animate([{transform:"translateY(-60px)"},{transform:"translateY("+(g.clientHeight+60)+"px)"}],{duration:3800+Math.random()*2200,easing:"linear"});
+a.onfinish=function(){b.remove()};
+b.onclick=function(e){var r=b.getBoundingClientRect();pop(r.left+r.width/2,r.top+r.height/2);a.cancel();b.remove();caught++;sc.textContent="Поймано: "+caught+" из 10";if(caught>=10){clearInterval(tm);en.hidden=false}}}
+function start(){caught=0;sc.textContent="Поймано: 0 из 10";en.hidden=true;g.querySelectorAll(".gh").forEach(function(e){e.remove()});g.hidden=false;clearInterval(tm);drop();tm=setInterval(drop,650)}
+function stop(){clearInterval(tm);g.hidden=true;g.querySelectorAll(".gh").forEach(function(e){e.remove()})}
+document.getElementById("pl").onclick=start;document.getElementById("ag").onclick=start;document.getElementById("cl").onclick=stop;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")stop()});
+var MO=[["Грустно", "Я рядом, даже если мы не в одной комнате. Выдохни. Всё это пройдёт, а я останусь. Захочешь рассказать мне всё, я просто послушаю."], ["Весело", "Обожаю, когда ты смеёшься. Это мой любимый звук на свете. Давай радоваться вместе!"], ["Скучаешь", "Я тоже скучаю. Закрой глаза и представь, что я тебя обнимаю. Скоро обязательно обниму по-настоящему."], ["Устала", "Ты сегодня уже сделала достаточно, умничка. Заварь чай, укройся пледом и позволь себе ничего не делать. Я тобой горжусь."], ["Не спится", "Считай не овец, а причины, по которым я тебя люблю. Ты уснёшь раньше, чем я закончу. Спокойной ночи, моя любимая."], ["Сомневаешься в себе", "Ты умнее, красивее и сильнее, чем думаешь. Я вижу это каждый день. Поверь мне."], ["Тревожно", "Дыши глубоко. Я рядом, любимка."], ["Злишься", "Ты имеешь право злиться. Я тебя слушаю."], ["Нужен комплимент", "Ты невероятно красивая."], ["Завал на работе", "Завал пройдёт, а ты останешься умничкой."]];
+function nextLine(){if(!bag.length)bag=lines.slice().sort(function(){return Math.random()-.5});return bag.pop()}
+var EXT={"Грустно": ["Иди ко мне, обниму мысленно. Ты не одна, любимка. Я с тобой.", "Плохой день не навсегда. А я навсегда рядом.", "Можно просто побыть грустной. Я не уйду и ничего не потребую.", "Я рядом, любимка. Выплачься, если надо.", "Ты имеешь право грустить. Я не осуждаю.", "Всё пройдёт, а я останусь с тобой.", "Обнимаю тебя тихо и крепко.", "Ты мне дорога и в грусти, и в радости.", "Расскажи мне всё или помолчим вместе.", "Твоя грусть не делает тебя слабой.", "Сделай глубокий вдох. Я с тобой.", "Завтра будет светлее. Обещаю быть рядом.", "Ты не одна, любимая.", "Хочешь, я просто побуду с тобой на связи?", "Всё наладится. Ты уже столько пережила.", "Позволь мне хоть немного тебя поддержать.", "Ты у меня самая сильная, даже когда плачешь.", "Пей чай и обнимай подушку. Это от меня.", "Грусть уйдёт, а наша любовь останется."], "Весело": ["Вот такой я тебя люблю больше всего: сияющей!", "Твоя радость заразна. Я уже улыбаюсь, пока это пишу.", "Давай запомним этот день. Ты в нём главная.", "Обожаю, когда ты сияешь!", "Хочу быть рядом и радоваться с тобой.", "Ты зажигаешь всё вокруг, любимка.", "Какое чудесное настроение! Береги его.", "Давай отметим это маленьким праздником.", "Твоя улыбка делает мой день.", "Танцуй, смейся, живи! Я тобой любуюсь.", "Ты такая красивая, когда счастлива.", "Рад, что у тебя хорошее настроение.", "Расскажи мне, что тебя так порадовало.", "Пусть таких дней будет больше.", "Мне нравится видеть тебя весёлой.", "Ты моё солнышко, и сегодня оно светит ярче.", "Давай пошалим! Я за любую затею.", "Ты заряжаешь меня радостью.", "Улыбнись ещё раз. Я это почувствую."], "Скучаешь": ["Я тоже. Считаю, сколько осталось до встречи.", "Скучать — значит любить. Значит, у нас всё хорошо.", "Пока меня нет рядом, пусть тебя обнимает это сердечко.", "Я скучаю не меньше тебя, любимая.", "Сколько бы километров ни было, ты в моём сердце.", "Закрой глаза: я рядом и обнимаю тебя.", "Скоро увидимся, и я не отпущу тебя.", "Каждая минута до встречи тянется как вечность.", "Напиши мне прямо сейчас, я отвечу.", "Включи наше фото и улыбнись.", "Мы вместе, даже когда не рядом.", "Я думаю о тебе каждую минуту.", "Скучай смелее, любимка: я скучаю втрое.", "Позвони мне. Хочу услышать твой голос.", "Обними подушку, это я.", "Расстояние ничего не значит, когда любишь.", "Мне тебя не хватает. Очень.", "Давай придумаем, как скорее встретиться.", "Моё сердце сейчас с тобой."], "Устала": ["Отдыхать — тоже работа, умничка. Ты заслужила.", "Скажи делам «подождите» и укройся пледом.", "Я рядом, а все дела подождут.", "Ты сегодня уже сделала достаточно.", "Отдыхай, любимка. Мир подождёт.", "Тёплая ванна, плед и чай. Это приказ.", "Ты имеешь право на отдых.", "Не нужно быть идеальной. Достаточно быть собой.", "Выключи телефон и просто полежи.", "Я горжусь тем, сколько ты делаешь.", "Поспи, если можешь. Я тебя оберегаю.", "Ты не машина, ты живой человек. И любимый.", "Позволь себе слабость, а я побуду сильным.", "Завтра новый день, сегодня отдыхай.", "Ты устала, потому что очень старалась.", "Ничего не делай хоть полчаса. Серьёзно.", "Ты у меня трудяга и умничка.", "Устала? Значит, пора обнимашек.", "Отдохни, а я прослежу, чтобы всё было хорошо."], "Не спится": ["Закрой глаза. Я думаю о тебе, а ты думай обо мне.", "Всё хорошее случится, а сейчас просто спать. Сладких снов, любимка.", "Если не спится, значит, ты где-то далеко в мыслях. Надеюсь, со мной.", "Закрой глаза и представь, что я рядом.", "Считай не овец, а мои «я тебя люблю».", "Тёплое молоко, тишина и мысли обо мне.", "Спокойной ночи, моя любимая.", "Пусть сны будут добрыми и сладкими.", "Всё подождёт до утра, а сейчас спать.", "Я охраняю твой сон, любимка.", "Накройся одеялом: оно обнимает тебя за меня.", "Если не спится, думай о хорошем.", "Выдохни. Этот день закончился. Ты умничка.", "Утром я первым пожелаю тебе доброго утра.", "Спи сладко, красавица.", "Прижмись к подушке, я тебя люблю.", "Тишина, покой и я в твоих мыслях.", "Пусть тебе приснится что-то хорошее.", "Скоро заснёшь, я уверен. Я с тобой."], "Сомневаешься в себе": ["Ты справляешься лучше, чем тебе кажется.", "Помнишь, как ты уже вытаскивала себя из трудного? Вытащишь и сейчас.", "Я вижу в тебе столько сильного. Позволь мне напомнить об этом.", "Ты сильнее, чем думаешь.", "Я вижу тебя настоящую, и она прекрасна.", "Ты умничка и справляешься блестяще.", "Верь в себя так, как верю в тебя я.", "Сомнения — не повод останавливаться.", "Ты достойна самого лучшего.", "Ты уже столько всего смогла!", "Я никогда в тебе не сомневался.", "Ты не обязана знать всё заранее.", "Ошибки — часть пути. Ты всё равно молодец.", "Мне ты нравишься именно такая.", "Ты намного лучше, чем себе кажется.", "Я твой главный фанат, любимка.", "Доверься себе. Ты умница.", "Смелее! У тебя получится.", "Ты прекрасна, и точка."], "Тревожно": ["Это пройдёт. Ты не одна.", "Назови пять вещей, которые видишь вокруг.", "Положи руку на сердце и сделай три вдоха.", "Всё будет хорошо, я уверен.", "Ты в безопасности. Я с тобой.", "Давай по шагам, не всё сразу.", "Расскажи мне, что тебя тревожит.", "Тревога обманывает. Ты справляешься.", "Выпей воды и посиди спокойно.", "Я верю в тебя и в то, что всё наладится.", "Не думай о завтра, просто побудь в сейчас.", "Ты сильнее своей тревоги.", "Обнимаю тебя через экран. Крепко.", "Позвони мне, если захочется.", "Ты умничка, что говоришь о своих чувствах.", "Один шаг за раз, любимая.", "Всё, что сейчас кажется страшным, пройдёт.", "Я рядом в любую минуту.", "Тише, тише. Всё хорошо. Я люблю тебя."], "Злишься": ["Выдохни, любимка. Я на твоей стороне.", "Расскажи, что случилось. Я пойму.", "Злость пройдёт, а я останусь.", "Давай вместе всё разберём.", "Ты не плохая, ты просто устала.", "Постучи по подушке, если хочется.", "Я никуда не уйду.", "Может, чаю и обнимашек?", "Ты умеешь договариваться, умничка.", "Сделай паузу. Ты всё решишь.", "Я рядом, даже когда ты сердишься.", "Не держи в себе. Поделись со мной.", "Ты красивая даже сердитая.", "Всё уладится. Я люблю тебя.", "Разреши мне тебя обнять.", "Не все битвы стоят твоих нервов.", "Давай посмеёмся вместе, когда остынешь.", "Я тебя понимаю, любимая.", "Дыши ровно. Я с тобой."], "Нужен комплимент": ["У тебя самая тёплая улыбка на свете.", "Ты умная, добрая и очень сильная.", "Мне нравится в тебе всё.", "Твои глаза — мои любимые.", "Ты смелая и настоящая.", "С тобой хочется быть лучше.", "Ты вдохновляешь меня каждый день.", "У тебя золотое сердце, любимка.", "Ты самая заботливая из всех.", "Твой голос действует на меня как музыка.", "Ты умеешь удивлять.", "Ты — моя гордость.", "Ты просто чудо.", "Ты прекраснее всех, кого я знаю.", "Твоя доброта согревает.", "Ты лучше любой мечты.", "Ты умничка и красавица, это факт.", "В тебе столько света!", "Ты — моя любимая, и это лучший комплимент."], "Завал на работе": ["Разбирай по одному делу за раз, любимка.", "Ты справишься с этим, как справлялась со всем остальным.", "Не всё должно быть сделано сегодня.", "Сначала самое важное, остальное подождёт.", "Выпей воды и сделай пятиминутный перерыв.", "Я горжусь тем, как ты стараешься.", "Ты не обязана тянуть всё одна.", "Работа закончится, а мы с тобой останемся.", "Не забудь поесть, моя трудяга.", "Выдохни: ты уже на полпути.", "Ты умничка, у тебя всё под контролем.", "Вечером тебя ждёт тёплое слово от меня.", "Скоро всё закончится, и мы отдохнём.", "Ты зарабатываешь не только деньги, но и моё восхищение.", "Даже в завале ты остаёшься красавицей.", "Не ругай себя, ты делаешь всё, что можешь.", "Каждое выполненное дело — шаг к отдыху.", "Я в тебя верю, как всегда.", "Давай после работы устроим себе спокойный вечер."]};
+function pickM(o){var a=[o[1]].concat(EXT[o[0]]||[]);var r=a[Math.floor(Math.random()*a.length)];if(r===mt.textContent&&a.length>1)r=a[(a.indexOf(r)+1)%a.length];return r}
+var md=document.getElementById("md"),ch=document.getElementById("ch"),mt=document.getElementById("mt");
+MO.forEach(function(o){var b=document.createElement("button");b.textContent=o[0];b.onclick=function(e){ch.querySelectorAll("button").forEach(function(x){x.classList.remove("on")});b.classList.add("on");mt.textContent=pickM(o);pop(e.clientX||innerWidth/2,e.clientY||innerHeight/2)};ch.appendChild(b)});
+document.getElementById("mb").onclick=function(){md.hidden=false};
+document.getElementById("cm").onclick=function(){md.hidden=true};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")md.hidden=true});
+var LG="Русский|Я тебя люблю|ru;Английский|I love you|en;Испанский|Te amo|es;Французский|Je t’aime|fr;Немецкий|Ich liebe dich|de;Итальянский|Ti amo|it;Португальский|Eu te amo|pt;Нидерландский|Ik hou van je|nl;Шведский|Jag älskar dig|sv;Норвежский|Jeg elsker deg|no;Датский|Jeg elsker dig|da;Финский|Minä rakastan sinua|fi;Исландский|Ég elska þig|is;Польский|Kocham cię|pl;Чешский|Miluji tě|cs;Словацкий|Ľúbim ťa|sk;Украинский|Я тебе кохаю|uk;Белорусский|Я цябе кахаю|be;Болгарский|Обичам те|bg;Сербский|Волим те|sr;Хорватский|Volim te|hr;Словенский|Ljubim te|sl;Македонский|Те сакам|mk;Албанский|Të dua|sq;Румынский|Te iubesc|ro;Венгерский|Szeretlek|hu;Греческий|Σ’ αγαπώ|el;Латышский|Es tevi mīlu|lv;Литовский|Aš tave myliu|lt;Эстонский|Ma armastan sind|et;Каталанский|T’estimo|ca;Баскский|Maite zaitut|eu;Ирландский|Tá grá agam duit|ga;Валлийский|Dw i’n dy garu di|cy;Мальтийский|Inħobbok|mt;Латынь|Te amo|la;Эсперанто|Mi amas vin|eo;Турецкий|Seni seviyorum|tr;Азербайджанский|Səni sevirəm|az;Казахский|Мен сені сүйемін|kk;Узбекский|Men seni sevaman|uz;Грузинский|მიყვარხარ|ka;Армянский|Ես քեզ սիրում եմ|hy;Арабский|أنا أحبك|ar;Персидский|دوستت دارم|fa;Хинди|मुझे तुमसे प्यार है|hi;Бенгальский|আমি তোমাকে ভালোবাসি|bn;Урду|مجھے تم سے محبت ہے|ur;Тамильский|நான் உன்னை காதலிக்கிறேன்|ta;Непальский|म तिमीलाई माया गर्छु|ne;Монгольский|Би чамд хайртай|mn;Китайский|我爱你|zh;Японский|愛してる|ja;Корейский|사랑해|ko;Индонезийский|Aku cinta kamu|id;Тагальский|Mahal kita|tl;Суахили|Nakupenda|sw;Зулу|Ngiyakuthanda|zu;Африкаанс|Ek is lief vir jou|af;Гавайский|Aloha au iā ʻoe|haw;Азбука Морзе|.. / .-.. --- ...- . / -.-- --- ..-|en".split(";").map(function(s){return s.split("|")});
+var t=document.getElementById("t"),ln=document.getElementById("ln"),li=0,cnt=0,ar=null;
+function nextL(){cnt++;if(cnt%4==0)return LG[0];li=li%(LG.length-1)+1;return LG[li]}
+function swapL(o){t.style.opacity=0;ln.style.opacity=0;clearTimeout(window.sw);window.sw=setTimeout(function(){t.textContent=o[1];t.lang=o[2];ln.textContent=o[0];t.classList.toggle("long",o[1].length>16);t.style.opacity=1;ln.style.opacity=1},still?0:450)}
+function runAuto(){clearInterval(ar);if(!still)ar=setInterval(function(){swapL(nextL())},4200)}
+function manual(e){swapL(nextL());runAuto();if(e&&e.clientX)pop(e.clientX,e.clientY)}
+t.addEventListener("click",manual);
+t.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();manual()}});
+runAuto();
+var ab=document.getElementById("abt"),st=document.getElementById("st");
+var SD=[[10120,"сообщений мы написали друг другу"],[101,"раз сказали друг другу «умничка»"],[98,"раз прозвучала «любимка»"],[86,"раз пожелали доброго утра"],[72,"раза сказали «я тебя люблю»"]];
+SD.forEach(function(d){var c=document.createElement("div");c.innerHTML="<b>0</b><span>"+d[1]+"</span>";st.appendChild(c)});
+function countUp(){var bs=st.querySelectorAll("b");SD.forEach(function(d,k){var b=bs[k];if(still){b.textContent=d[0].toLocaleString("ru-RU");return}var t0=null;function f(ts){if(!t0)t0=ts;var p=Math.min(1,(ts-t0)/1400);b.textContent=Math.round(d[0]*(1-Math.pow(1-p,3))).toLocaleString("ru-RU");if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)})}
+document.getElementById("ab").onclick=function(){ab.hidden=false;countUp()};
+document.getElementById("ca").onclick=function(){ab.hidden=true};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")ab.hidden=true});
+
+var LETTER="Любимая,\n\nя долго думал, как сказать тебе всё, что чувствую, и решил просто написать.\n\nС тобой всё стало теплее. Рядом с тобой я спокойнее, добрее и сильнее.\n\nЯ люблю, как ты заботишься обо мне. Люблю твои голосовые, твоё «спасибочки» и твоё «доброе утро» в любом настроении.\n\nТы умничка. Ты справляешься даже тогда, когда сама в себя не веришь. А я верю. Всегда.\n\nЕсли тебе будет грустно, тревожно или просто тяжело, помни: я на твоей стороне. Захочешь молчать, будем молчать вместе. Захочешь рассказать, я послушаю.\n\nСпасибо, что ты есть у меня.\n\nЛюблю тебя как до луны и обратно, любимка.\n\nТвой навсегда";
+var gid=function(x){return document.getElementById(x)};
+var ltr=gid("ltr"),ltx=gid("ltx"),ltm=null,lti=0;
+function lstop(){clearTimeout(ltm);ltx.classList.remove("go")}
+function lstep(){if(lti>=LETTER.length){ltx.classList.remove("go");return}var c=LETTER[lti++];ltx.textContent=LETTER.slice(0,lti);var d=c==="\n"?320:/[.!?]/.test(c)?260:c===","?130:45;ltm=setTimeout(lstep,d)}
+function lstart(){lstop();lti=0;ltx.style.minHeight="0";ltx.textContent=LETTER;ltx.style.minHeight=ltx.offsetHeight+"px";ltx.textContent="";if(still){ltx.textContent=LETTER;lti=LETTER.length;return}ltx.classList.add("go");lstep()}
+function lfull(){lstop();lti=LETTER.length;ltx.textContent=LETTER}
+gid("ltb").onclick=function(){ltr.hidden=false;lstart()};
+gid("ltc").onclick=function(){ltr.hidden=true;lstop()};
+gid("ltre").onclick=lstart;gid("lts").onclick=lfull;
+var wsh=gid("wsh"),ws=gid("ws"),wf=gid("wf"),wt=gid("wt"),wm=gid("wm"),wsn=gid("wsn"),wh=gid("wh"),shT=null,WS=[],lastW="";
+
+function wload(){try{WS=JSON.parse(localStorage.getItem("wishes")||"[]")}catch(e){WS=[]}}
+function wsave(){try{localStorage.setItem("wishes",JSON.stringify(WS))}catch(e){}}
+function wdraw(w,i,anim){var b=document.createElement("button");b.className="wst";b.textContent="★";b.setAttribute("aria-label","Твоё желание");b.style.left=w.x+"%";b.style.top=w.y+"%";b.onclick=function(){wm.textContent="Твоё желание: «"+w.t+"»";lastW=w.t;wsn.hidden=false};ws.appendChild(b);if(anim&&!still)b.animate([{transform:"translateY(70vh) scale(.3)",opacity:0},{transform:"translateY(0) scale(1)",opacity:1}],{duration:1800,easing:"cubic-bezier(.2,.7,.3,1)"})}
+function wshoot(){if(wsh.hidden)return;var b=document.createElement("button");b.className="shoot";b.setAttribute("aria-label","Падающая звезда");var x=30+Math.random()*60,y=5+Math.random()*30;b.style.left=x+"%";b.style.top=y+"%";b.style.transform="rotate(30deg)";ws.appendChild(b);var a=b.animate([{transform:"rotate(30deg) translateX(0)",opacity:0},{opacity:1,offset:.2},{transform:"rotate(30deg) translateX(-260px)",opacity:0}],{duration:2400,easing:"ease-in"});a.onfinish=function(){b.remove()};b.onclick=function(){b.remove();wopen()}}
+function wopen(){wf.hidden=false;wh.textContent="Загадай желание и нажми «Загадать»";gid("wgo").hidden=true;wm.textContent="";wsn.hidden=true;wt.value="";wt.focus()}
+gid("wb").onclick=function(){wsh.hidden=false;wload();ws.querySelectorAll(".wst").forEach(function(e){e.remove()});WS.forEach(function(w,i){wdraw(w,i,false)});wm.textContent=WS.length?"Нажми на свою звезду, чтобы перечитать желание.":"";wf.hidden=true;gid("wgo").hidden=false;wsn.hidden=true;wh.textContent="Поймай падающую звезду";if(!still){clearInterval(shT);shT=setInterval(wshoot,4500);setTimeout(wshoot,900)}};
+gid("wcl").onclick=function(){wsh.hidden=true;clearInterval(shT)};
+gid("wgo").onclick=wopen;
+gid("wno").onclick=function(){wf.hidden=true;gid("wgo").hidden=false;wh.textContent="Поймай падающую звезду"};
+gid("wok").onclick=function(){var t=wt.value.trim();if(!t){wt.focus();return}var w={x:8+Math.random()*80,y:8+Math.random()*45,t:t};WS.push(w);wsave();wdraw(w,WS.length-1,true);lastW=t;wf.hidden=true;gid("wgo").hidden=false;wh.textContent="Загадай ещё, если хочешь";wm.textContent="Звёзды услышали тебя. Желание остаётся только у тебя, пока ты сама не захочешь им поделиться.";wsn.hidden=false};
+wsn.onclick=function(){window.open("https://wa.me/?text="+encodeURIComponent("Я загадала желание: "+lastW),"_blank")};
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){ltr.hidden=true;lstop();wsh.hidden=true;clearInterval(shT)}});
+
+var TABS=[["home","Главная","♡"],["foryou","Для тебя","✉"],["games","Игры","✦"],["sky","Небо","☾"],["us","Мы","❤"]];
+var PG={foryou:{t:"Для тебя",s:"Тёплые слова на любой случай",c:[["Когда тебе…","Слова на каждое настроение","mb"],["Письмо","Печатается само, как на старой машинке","ltb"]]},
+games:{t:"Игры",s:"Немного веселья",c:[["Поймай сердечки","Десять сердечек и сюрприз в конце","pl"],["Любит, не любит","Ромашка, которая никогда не ошибается","dzb"],["Скоро будут новые игры","Я уже придумываю",0,"Скоро"]]},
+sky:{t:"Небо",s:"Звёзды слышат всё",c:[["Загадай желание","Поймай падающую звезду","wb"],["Открой, когда…","Конверты на особые случаи",0]]},
+us:{t:"Мы",s:"Всё, что про нас",c:[["Мы в цифрах","Наш чат и наш словарик","ab"],["Наша история","Ещё создаётся…",0,"Создаётся"],["Галерея","Пора уже начать с первой фотографии",0,"Пора начать"]]}};
+var pgs=gid("pgs"),nav=gid("nav"),mainEl=document.querySelector("main");
+function Sky(cv,noHeart){var c=cv.getContext("2d"),W=0,H=0,dp=1,st=[],bg=document.createElement("canvas"),co=[],sh=[],hp=[],raf=0,run=false,last=0,t=0,nC=0,nS=0,cols=["#ffffff","#ffe9b0","#cfe0ff","#ffd0e0"];
+function R(a,b){return a+Math.random()*(b-a)}
+function build(){dp=Math.min(2,window.devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dp;cv.height=H*dp;c.setTransform(dp,0,0,dp,0,0);st=[];var n=Math.round(W*H/2400),i;
+for(i=0;i<n;i++){var l=Math.random(),r=l<.6?R(.4,.9):l<.9?R(.9,1.5):R(1.5,2.3);st.push({x:R(0,W),y:R(0,H),r:r,ph:R(0,6.28),sp:R(.6,2.6),c:cols[Math.floor(Math.random()*4)],k:r>1.7})}
+bg.width=W;bg.height=H;var b=bg.getContext("2d");b.clearRect(0,0,W,H);
+[[.30,.05],[.18,.07],[.08,.1]].forEach(function(p){b.save();b.lineCap="round";b.lineWidth=H*p[0];var g=b.createLinearGradient(0,H,W,0);g.addColorStop(0,"rgba(255,200,230,0)");g.addColorStop(.5,"rgba(255,225,245,"+p[1]+")");g.addColorStop(1,"rgba(200,190,255,0)");b.strokeStyle=g;b.beginPath();b.moveTo(-W*.1,H*.85);b.lineTo(W*1.1,H*.1);b.stroke();b.restore()});
+for(i=0;i<420;i++){var u=Math.random(),cx=u*W,cy=H*(.85-.75*u),o=(Math.random()+Math.random()+Math.random()-1.5)*H*.16;b.fillStyle="rgba(255,235,250,"+R(.15,.6)+")";b.fillRect(cx-o*.4,cy+o,R(.5,1.1),R(.5,1.1))}
+var s=Math.min(W,H*.55)*.0105;hp=[];for(i=0;i<28;i++){var a=i/28*6.2832;hp.push({x:W*.5+16*Math.pow(Math.sin(a),3)*s,y:H*.36-(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a))*s})}}
+function comet(){var sp=W*.28+R(0,W*.1);co.push({x:W+60,y:R(0,H*.45),vx:-sp,vy:sp*R(.25,.4),life:0,max:R(6,9)})}
+function shoot(){sh.push({x:R(W*.3,W),y:R(0,H*.4),vx:-R(500,800),vy:R(250,400),life:0,max:.9})}
+function dr(o,len,w,head,dust){var an=Math.atan2(o.vy,o.vx),tx=o.x-Math.cos(an)*len,ty=o.y-Math.sin(an)*len,g=c.createLinearGradient(o.x,o.y,tx,ty);g.addColorStop(0,"rgba(255,255,255,.95)");g.addColorStop(.3,"rgba(190,225,255,.5)");g.addColorStop(1,"rgba(190,225,255,0)");c.strokeStyle=g;c.lineCap="round";c.lineWidth=w;c.beginPath();c.moveTo(o.x,o.y);c.lineTo(tx,ty);c.stroke();
+if(dust){var g2=c.createLinearGradient(o.x,o.y,tx,ty);g2.addColorStop(0,"rgba(255,210,150,.5)");g2.addColorStop(1,"rgba(255,210,150,0)");c.strokeStyle=g2;c.lineWidth=w*2.4;c.beginPath();c.moveTo(o.x,o.y);c.quadraticCurveTo((o.x+tx)/2+Math.sin(an)*len*.18,(o.y+ty)/2-Math.cos(an)*len*.18,tx-Math.cos(an)*len*.2,ty-Math.sin(an)*len*.2);c.stroke()}
+var h=c.createRadialGradient(o.x,o.y,0,o.x,o.y,head);h.addColorStop(0,"rgba(255,255,255,1)");h.addColorStop(.4,"rgba(200,230,255,.55)");h.addColorStop(1,"rgba(200,230,255,0)");c.fillStyle=h;c.beginPath();c.arc(o.x,o.y,head,0,6.2832);c.fill()}
+function frame(dt){t+=dt;c.clearRect(0,0,W,H);c.drawImage(bg,0,0,W,H);
+st.forEach(function(s){var a=.4+.6*(.5+.5*Math.sin(t*s.sp+s.ph));c.globalAlpha=a;c.fillStyle=s.c;c.beginPath();c.arc(s.x,s.y,s.r,0,6.2832);c.fill();if(s.k){c.strokeStyle=s.c;c.lineWidth=.6;var L=s.r*5*a;c.beginPath();c.moveTo(s.x-L,s.y);c.lineTo(s.x+L,s.y);c.moveTo(s.x,s.y-L);c.lineTo(s.x,s.y+L);c.stroke()}});c.globalAlpha=1;
+if(!noHeart&&hp.length){c.strokeStyle="rgba(255,225,150,.35)";c.lineWidth=1;c.beginPath();hp.forEach(function(p,i){i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)});c.closePath();c.stroke();var by=0;hp.forEach(function(p,i){var a=.6+.4*Math.sin(t*1.5+i),g=c.createRadialGradient(p.x,p.y,0,p.x,p.y,10);g.addColorStop(0,"rgba(255,233,168,"+a+")");g.addColorStop(1,"rgba(255,233,168,0)");c.fillStyle=g;c.beginPath();c.arc(p.x,p.y,10,0,6.2832);c.fill();c.fillStyle="#fff4cf";c.beginPath();c.arc(p.x,p.y,1.8,0,6.2832);c.fill();by=Math.max(by,p.y)});c.font='19px "Marck Script",cursive';c.fillStyle="rgba(255,233,168,.8)";c.textAlign="center";c.fillText("наше созвездие",W*.5,by+30)}
+co=co.filter(function(o){o.life+=dt;o.x+=o.vx*dt;o.y+=o.vy*dt;dr(o,Math.min(260,W*.6),3,14,true);return o.life<o.max&&o.x>-300});
+sh=sh.filter(function(o){o.life+=dt;o.x+=o.vx*dt;o.y+=o.vy*dt;c.globalAlpha=1-o.life/o.max;dr(o,100,1.6,5,false);c.globalAlpha=1;return o.life<o.max})}
+function loop(ts){if(!run)return;if(!cv.offsetParent){run=false;return}var dt=Math.min(.05,(ts-last)/1000);last=ts;if(t>=nC){comet();nC=t+R(6,11)}if(t>=nS){shoot();nS=t+R(2.5,5)}frame(dt);raf=requestAnimationFrame(loop)}
+return{start:function(){if(run)return;build();run=true;t=0;nC=1.2;nS=2;last=performance.now();if(still){frame(0);run=false}else raf=requestAnimationFrame(loop)},stop:function(){run=false;cancelAnimationFrame(raf)}}}
+Object.keys(PG).forEach(function(k){var p=PG[k],e=document.createElement("section");e.className="pg"+(k==="sky"?" night":"");e.id="pg-"+k;e.hidden=true;
+var hd="<h2>"+p.t+"</h2><p class=\"sub\">"+p.s+"</p>";if(k==="foryou")hd+="<div class=\"daily\"><small>Послание на сегодня</small><p id=\"dm\"></p></div>";
+e.innerHTML=k==="sky"?"<canvas id=\"skc\" class=\"skcv\"></canvas><div class=\"nin\"><div>"+hd+"</div><div class=\"cards\"></div></div>":hd+"<div class=\"cards\"></div>";var cs=e.querySelector(".cards");
+p.c.forEach(function(c){var b=document.createElement("button");b.className="card"+(c[2]?"":" soon");b.innerHTML="<b>"+c[0]+"</b><span>"+c[1]+"</span>"+(c[2]?"":"<i>"+(c[3]||"Скоро")+"</i>");
+if(c[2])b.onclick=function(){gid(c[2]).click()};else b.setAttribute("aria-disabled","true");cs.appendChild(b)});pgs.appendChild(e)});
+var skyP=Sky(gid("skc"));
+var dd=new Date(),doy=Math.floor((dd-new Date(dd.getFullYear(),0,0))/864e5);gid("dm").textContent=lines[doy%lines.length];
+TABS.forEach(function(t){var b=document.createElement("button");b.className="tab";b.dataset.r=t[0];b.innerHTML="<span>"+t[2]+"</span>"+t[1];b.onclick=function(){location.hash=t[0]};nav.appendChild(b)});
+function route(){var r=(location.hash||"#home").slice(1);if(r!=="home"&&!PG[r])r="home";mainEl.hidden=r!=="home";document.querySelectorAll(".pg").forEach(function(e){e.hidden=e.id!=="pg-"+r});if(r==="sky")skyP.start();else skyP.stop();nav.querySelectorAll(".tab").forEach(function(b){if(b.dataset.r===r)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")})}
+window.addEventListener("hashchange",route);route();
+
+var dz=gid("dz"),dzs=gid("dzs"),dzt=gid("dzt"),dzL=0,dzN=0,NS="http://www.w3.org/2000/svg";
+function dzPluck(g){if(g.dataset.d)return;g.dataset.d=1;dzN++;dzL--;dzt.textContent=dzN%2?"Любит":"Не любит";var a=+g.dataset.a;var an=g.animate([{transform:"rotate("+a+"deg) translateY(0)",opacity:1},{transform:"rotate("+(a+40)+"deg) translateY(-150px)",opacity:0}],{duration:still?1:700,easing:"ease-out",fill:"forwards"});an.onfinish=function(){g.style.display="none"};
+if(dzL===0){dzt.textContent="Любит! Ромашка не ошибается ♥";var r=dzs.getBoundingClientRect();pop(r.left+r.width/2,r.top+r.height/2)}}
+function dzBuild(){dzs.innerHTML="";var n=[11,13,15][Math.floor(Math.random()*3)];dzL=n;dzN=0;dzt.textContent="Оторви лепесток";
+for(var i=0;i<n;i++){var a=i*360/n,e=document.createElementNS(NS,"ellipse");e.setAttribute("cx",150);e.setAttribute("cy",82);e.setAttribute("rx",17);e.setAttribute("ry",46);e.setAttribute("fill","#fff");e.setAttribute("stroke","#ffb3c1");e.setAttribute("stroke-width",1.5);e.setAttribute("tabindex",0);e.setAttribute("role","button");e.setAttribute("aria-label","Лепесток");e.style.transformOrigin="150px 150px";e.style.transform="rotate("+a+"deg)";e.dataset.a=a;
+e.addEventListener("click",function(){dzPluck(this)});e.addEventListener("keydown",function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();dzPluck(this)}});dzs.appendChild(e)}
+var c=document.createElementNS(NS,"circle");c.setAttribute("cx",150);c.setAttribute("cy",150);c.setAttribute("r",28);c.setAttribute("fill","#ffcf5a");c.setAttribute("stroke","#e8a73a");c.setAttribute("stroke-width",3);c.style.pointerEvents="none";dzs.appendChild(c)}
+gid("dzb").onclick=function(){dz.hidden=false;dzBuild()};
+gid("dzc").onclick=function(){dz.hidden=true};gid("dzr").onclick=dzBuild;
+var wsky=Sky(gid("wsc"),true);
+gid("wb").addEventListener("click",function(){wsky.start()});
+gid("wcl").addEventListener("click",function(){wsky.stop()});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){dz.hidden=true;wsky.stop()}});
+</script>
+</body>
+</html>
